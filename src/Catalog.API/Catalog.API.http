@@ -7,6 +7,6 @@ Content-Type: application/json
   "name": "Test Mug",
   "price": 9.99,
   "catalogTypeId": 3,
-  "catalogBrandId": 1,
+  "catalogBrandId": 999,
   "availableStock": 5
 }

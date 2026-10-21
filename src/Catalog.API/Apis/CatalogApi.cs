@@ -23,7 +23,7 @@ public static class CatalogApi
         return app;
     }
 
-    public static async Task<Ok<PaginatedItems<CatalogItemDto>>> GetAllItems (
+    public static async Task<Ok<PaginatedItems<CatalogItemDto>>> GetAllItems(
         [AsParameters] PaginationRequest paginationRequest,
         CatalogContext context,
         int? brand,
@@ -36,11 +36,11 @@ public static class CatalogApi
 
         var root = context.CatalogItems.AsQueryable();
 
-        if(brand is not null)
+        if (brand is not null)
         {
             root = root.Where(c => c.CatalogBrandId == brand);
         }
-        if(type is not null)
+        if (type is not null)
         {
             root = root.Where(c => c.CatalogTypeId == type);
         }
@@ -61,7 +61,7 @@ public static class CatalogApi
         return TypedResults.Ok(new PaginatedItems<CatalogItemDto>(pageIndex, pageSize, totalItems, data));
     }
 
-    public static async Task<Results<Ok<CatalogItemDto>, NotFound>> GetItemById (
+    public static async Task<Results<Ok<CatalogItemDto>, NotFound>> GetItemById(
         int id,
         CatalogContext context,
         CancellationToken cancellationToken
@@ -77,12 +77,25 @@ public static class CatalogApi
             ? TypedResults.NotFound()
             : TypedResults.Ok(item.ToDto());
     }
-    
-    public static async Task<Results<Created<CatalogItemDto>,ValidationProblem>> CreateItem(
+
+    public static async Task<Results<Created<CatalogItemDto>, ValidationProblem>> CreateItem(
         CreateCatalogItemDto dto,
         CatalogContext context,
         CancellationToken cancellationToken)
     {
+        var validations = new Dictionary<string, string[]>();
+        if (!await context.CatalogBrands.AnyAsync(b => b.Id == dto.CatalogBrandId, cancellationToken))
+        {
+            validations.Add("CatalogBrandId", ["Brand does not exist."]);
+        }
+        if (!await context.CatalogTypes.AnyAsync(t => t.Id == dto.CatalogTypeId, cancellationToken))
+        {
+            validations.Add("CatalogTypeId", ["Type does not exist."]);
+        }
+
+        if (validations.Count > 0)
+            return TypedResults.ValidationProblem(validations);
+            
         var item = dto.ToCatalogItem();
 
         context.CatalogItems.Add(item);
