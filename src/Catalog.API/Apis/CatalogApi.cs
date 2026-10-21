@@ -15,6 +15,8 @@ public static class CatalogApi
 
         api.MapGet("/items", GetAllItems);
 
+        api.MapGet("/items/{id:int}", GetItemById);
+
         return app;
     }
 
@@ -41,5 +43,22 @@ public static class CatalogApi
         var data = itemsOnPage.Select(i => i.ToDto()).ToList();
 
         return TypedResults.Ok(new PaginatedItems<CatalogItemDto>(pageIndex, pageSize, totalItems, data));
+    }
+
+    public static async Task<Results<Ok<CatalogItemDto>, NotFound>> GetItemById (
+        int id,
+        CatalogContext context,
+        CancellationToken cancellationToken
+    )
+    {
+        var item = await context.CatalogItems
+            .AsNoTracking()
+            .Include(c => c.CatalogBrand)
+            .Include(c => c.CatalogType)
+            .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
+
+        return item is null
+            ? TypedResults.NotFound()
+            : TypedResults.Ok(item.ToDto());
     }
 }
