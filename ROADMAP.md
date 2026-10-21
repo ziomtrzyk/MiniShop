@@ -52,7 +52,7 @@ Compare with: `eShop.slnx`, `Directory.Build.props`, `Directory.Packages.props`.
 
 New concepts: Minimal APIs with `MapGroup` / `TypedResults`, PostgreSQL, pagination, `CancellationToken` everywhere.
 
-- [ ] Entities: `CatalogItem`, `CatalogBrand`, `CatalogType`
+- [x] Entities: `CatalogItem`, `CatalogBrand`, `CatalogType`
 - [ ] EF Core with Npgsql, PostgreSQL in a Docker container
 - [ ] Seed data on startup
 - [ ] Endpoints: list (paginated), get by id, filter by brand/type, create, update, delete
