@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Catalog.API.Model;
 
 public class CatalogItem
