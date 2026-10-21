@@ -3,6 +3,7 @@ using Catalog.API.Infrastructure;
 using Catalog.API.Mappings;
 using Catalog.API.Model;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.API.Apis;
@@ -23,15 +24,28 @@ public static class CatalogApi
     public static async Task<Ok<PaginatedItems<CatalogItemDto>>> GetAllItems (
         [AsParameters] PaginationRequest paginationRequest,
         CatalogContext context,
+        int? brand,
+        int? type,
         CancellationToken cancellationToken
     )
     {
         var pageSize = paginationRequest.PageSize;
         var pageIndex = paginationRequest.PageIndex;
 
-        var totalItems = await context.CatalogItems.LongCountAsync(cancellationToken);
+        var root = context.CatalogItems.AsQueryable();
 
-        var itemsOnPage = await context.CatalogItems
+        if(brand is not null)
+        {
+            root = root.Where(c => c.CatalogBrandId == brand);
+        }
+        if(type is not null)
+        {
+            root = root.Where(c => c.CatalogTypeId == type);
+        }
+
+        var totalItems = await root.LongCountAsync(cancellationToken);
+
+        var itemsOnPage = await root
             .AsNoTracking()
             .Include(c => c.CatalogBrand)
             .Include(c => c.CatalogType)
