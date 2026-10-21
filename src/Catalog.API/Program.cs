@@ -11,6 +11,16 @@ builder.Services.AddDbContext<CatalogContext>(o => o.UseNpgsql(builder.Configura
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<CatalogContext>();
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
+    await context.Database.MigrateAsync();
+    await CatalogContextSeed.SeedAsync(context, logger);
+}
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
