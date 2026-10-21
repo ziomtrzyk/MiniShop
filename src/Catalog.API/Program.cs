@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Services.AddValidation();
+
 builder.Services.AddDbContext<CatalogContext>(o => o.UseNpgsql(builder.Configuration.GetConnectionString("CatalogDb")));
 
 var app = builder.Build();

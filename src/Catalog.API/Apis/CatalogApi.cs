@@ -18,6 +18,8 @@ public static class CatalogApi
 
         api.MapGet("/items/{id:int}", GetItemById);
 
+        api.MapPost("/items", CreateItem);
+
         return app;
     }
 
@@ -74,5 +76,21 @@ public static class CatalogApi
         return item is null
             ? TypedResults.NotFound()
             : TypedResults.Ok(item.ToDto());
+    }
+    
+    public static async Task<Results<Created<CatalogItemDto>,ValidationProblem>> CreateItem(
+        CreateCatalogItemDto dto,
+        CatalogContext context,
+        CancellationToken cancellationToken)
+    {
+        var item = dto.ToCatalogItem();
+
+        context.CatalogItems.Add(item);
+        await context.SaveChangesAsync(cancellationToken);
+
+        await context.Entry(item).Reference(i => i.CatalogBrand).LoadAsync(cancellationToken);
+        await context.Entry(item).Reference(i => i.CatalogType).LoadAsync(cancellationToken);
+
+        return TypedResults.Created($"/api/catalog/items/{item.Id}", item.ToDto());
     }
 }

@@ -1,0 +1,12 @@
+@baseUrl = http://localhost:5016
+
+POST {{baseUrl}}/api/catalog/items
+Content-Type: application/json
+
+{
+  "name": "Test Mug",
+  "price": 9.99,
+  "catalogTypeId": 3,
+  "catalogBrandId": 1,
+  "availableStock": 5
+}

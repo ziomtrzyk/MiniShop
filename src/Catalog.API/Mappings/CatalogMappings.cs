@@ -17,4 +17,14 @@ public static class CatalogMappings
         Brand: input.CatalogBrand?.Brand,
         AvailableStock: input.AvailableStock
     );
+    public static CatalogItem ToCatalogItem(this CreateCatalogItemDto input) => new()
+    {
+        Name = input.Name,
+        Description = input.Description,
+        Price = input.Price,
+        PictureFileName = input.PictureFileName,
+        CatalogTypeId = input.CatalogTypeId,
+        CatalogBrandId = input.CatalogBrandId,
+        AvailableStock = input.AvailableStock
+    };
 }
