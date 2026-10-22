@@ -1,0 +1,13 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.6.3">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Catalog.API\Catalog.API.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AspireUseCliBundle>true</AspireUseCliBundle>
+    <UserSecretsId>17154d22-d812-4dee-84df-bd4c9c0130bc</UserSecretsId>
+  </PropertyGroup>
+
+</Project>
