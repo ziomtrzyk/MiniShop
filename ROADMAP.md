@@ -56,8 +56,8 @@ New concepts: Minimal APIs with `MapGroup` / `TypedResults`, PostgreSQL, paginat
 - [x] EF Core with Npgsql, PostgreSQL in a Docker container
 - [x] Seed data on startup
 - [X] Endpoints: list (paginated), get by id, filter by brand/type, create, update, delete
-- [ ] `PaginatedItems<T>` response
-- [ ] OpenAPI + Scalar
+- [x] `PaginatedItems<T>` response
+- [x] OpenAPI + Scalar
 
 Done when: products can be browsed page by page in Scalar.
 Compare with: `src/Catalog.API/Apis/CatalogApi.cs`, `src/Catalog.API/Model/`.
