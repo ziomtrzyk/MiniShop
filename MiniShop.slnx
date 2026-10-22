@@ -2,5 +2,6 @@
   <Folder Name="/src/">
     <Project Path="src/Catalog.API/Catalog.API.csproj" />
     <Project Path="src/MiniShop.AppHost/MiniShop.AppHost.csproj" />
+    <Project Path="src/MiniShop.ServiceDefaults/MiniShop.ServiceDefaults.csproj" />
   </Folder>
 </Solution>
