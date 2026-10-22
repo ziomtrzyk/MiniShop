@@ -27,4 +27,14 @@ public static class CatalogMappings
         CatalogBrandId = input.CatalogBrandId,
         AvailableStock = input.AvailableStock
     };
+    public static void UpdateCatalogItem(this CatalogItem catalogItem, CreateCatalogItemDto input)
+    {
+        catalogItem.Name = input.Name;
+        catalogItem.Description = input.Description;
+        catalogItem.Price = input.Price;
+        catalogItem.PictureFileName = input.PictureFileName;
+        catalogItem.CatalogTypeId = input.CatalogTypeId;
+        catalogItem.CatalogBrandId = input.CatalogBrandId;
+        catalogItem.AvailableStock = input.AvailableStock;
+    }
 }
