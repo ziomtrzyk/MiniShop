@@ -10,4 +10,6 @@ builder.AddProject<Projects.Catalog_API>("catalog-api")
     .WithReference(catalogDb)
     .WaitFor(catalogDb);
 
+builder.AddProject<Projects.Basket_API>("basket-api");
+
 builder.Build().Run();
