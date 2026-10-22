@@ -55,7 +55,7 @@ New concepts: Minimal APIs with `MapGroup` / `TypedResults`, PostgreSQL, paginat
 - [x] Entities: `CatalogItem`, `CatalogBrand`, `CatalogType`
 - [x] EF Core with Npgsql, PostgreSQL in a Docker container
 - [x] Seed data on startup
-- [ ] Endpoints: list (paginated), get by id, filter by brand/type, create, update, delete
+- [X] Endpoints: list (paginated), get by id, filter by brand/type, create, update, delete
 - [ ] `PaginatedItems<T>` response
 - [ ] OpenAPI + Scalar
 
