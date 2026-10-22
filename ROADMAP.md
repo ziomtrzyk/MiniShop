@@ -66,10 +66,10 @@ Compare with: `src/Catalog.API/Apis/CatalogApi.cs`, `src/Catalog.API/Model/`.
 
 New concepts: AppHost, ServiceDefaults, service discovery, health checks, OpenTelemetry, dashboard.
 
-- [ ] `MiniShop.AppHost` – starts PostgreSQL and Catalog.API
-- [ ] `MiniShop.ServiceDefaults` – health checks, telemetry, resilience
-- [ ] Connection string comes from Aspire, not `appsettings.json`
-- [ ] Remove the manual Docker command for PostgreSQL
+- [x] `MiniShop.AppHost` – starts PostgreSQL and Catalog.API
+- [x] `MiniShop.ServiceDefaults` – health checks, telemetry, resilience
+- [x] Connection string comes from Aspire, not `appsettings.json`
+- [x] Remove the manual Docker command for PostgreSQL
 
 Done when: one `dotnet run` on AppHost starts everything; logs and traces are visible in the dashboard.
 Compare with: `src/eShop.AppHost/`, `src/eShop.ServiceDefaults/`.

@@ -14,7 +14,7 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddValidation();
 
-builder.Services.AddDbContext<CatalogContext>(o => o.UseNpgsql(builder.Configuration.GetConnectionString("CatalogDb")));
+builder.AddNpgsqlDbContext<CatalogContext>("catalogdb");
 
 var app = builder.Build();
 
