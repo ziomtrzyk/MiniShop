@@ -80,7 +80,7 @@ New concepts: Redis, gRPC, service-to-service calls.
 
 - [x] Basket stored in Redis (key = user id)
 - [x] Version A: REST endpoints (get / update / delete basket)
-- [ ] Version B: rewrite as gRPC service (`.proto` file)
+- [x] Version B: rewrite as gRPC service (`.proto` file)
 - [x] Redis added in AppHost
 
 Done when: a basket can be saved and read back through gRPC.
