@@ -3,7 +3,6 @@ using Catalog.API.Infrastructure;
 using Catalog.API.Mappings;
 using Catalog.API.Model;
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.API.Apis;

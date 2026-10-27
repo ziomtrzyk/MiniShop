@@ -1,6 +1,53 @@
-@Basket.API_HostAddress = http://localhost:5235
+@baseurl = http://localhost:5235
+@buyerId = jan
 
-GET {{Basket.API_HostAddress}}/weatherforecast/
+### Get basket (empty if it does not exist yet)
+GET {{baseurl}}/api/basket/{{buyerId}}
 Accept: application/json
 
-###
+### Replace basket
+PUT {{baseurl}}/api/basket/{{buyerId}}
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "productId": 1,
+      "productName": "Test Mug",
+      "unitPrice": 9.99,
+      "quantity": 2
+    },
+    {
+      "productId": 2,
+      "productName": "Test T-Shirt",
+      "unitPrice": 19.99,
+      "quantity": 1
+    }
+  ]
+}
+
+### Get basket after update (should return both items)
+GET {{baseurl}}/api/basket/{{buyerId}}
+Accept: application/json
+
+### Get basket of another buyer (should be empty)
+GET {{baseurl}}/api/basket/ola
+Accept: application/json
+
+### Invalid item (should return 400)
+PUT {{baseurl}}/api/basket/{{buyerId}}
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "productId": 0,
+      "productName": "",
+      "unitPrice": 0,
+      "quantity": 1000
+    }
+  ]
+}
+
+### Delete basket (204 first time, 404 second time)
+DELETE {{baseurl}}/api/basket/{{buyerId}}
