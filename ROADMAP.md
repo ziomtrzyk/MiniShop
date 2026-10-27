@@ -78,10 +78,10 @@ Compare with: `src/eShop.AppHost/`, `src/eShop.ServiceDefaults/`.
 
 New concepts: Redis, gRPC, service-to-service calls.
 
-- [ ] Basket stored in Redis (key = user id)
-- [ ] Version A: REST endpoints (get / update / delete basket)
+- [x] Basket stored in Redis (key = user id)
+- [x] Version A: REST endpoints (get / update / delete basket)
 - [ ] Version B: rewrite as gRPC service (`.proto` file)
-- [ ] Redis added in AppHost
+- [x] Redis added in AppHost
 
 Done when: a basket can be saved and read back through gRPC.
 Compare with: `src/Basket.API/Proto/`, `src/Basket.API/Grpc/`, `src/Basket.API/Repositories/`.
