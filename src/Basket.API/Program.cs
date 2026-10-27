@@ -1,4 +1,5 @@
 using Basket.API.Apis;
+using Basket.API.Grpc;
 using Basket.API.Repositories;
 using Scalar.AspNetCore;
 
@@ -16,17 +17,24 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddValidation();
 
+builder.Services.AddGrpc();
+
+builder.Services.AddGrpcReflection();
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
 
 app.MapBasketApi();
 
+app.MapGrpcService<BasketService>();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.MapScalarApiReference();
+    app.MapGrpcReflectionService();
 }
 
 app.UseHttpsRedirection();

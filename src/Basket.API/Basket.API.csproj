@@ -2,12 +2,15 @@
 
   <ItemGroup>
     <PackageReference Include="Aspire.StackExchange.Redis" />
+    <PackageReference Include="Grpc.AspNetCore" />
+    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Scalar.AspNetCore" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MiniShop.ServiceDefaults\MiniShop.ServiceDefaults.csproj" />
+    <Protobuf Include="Proto\basket.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>
