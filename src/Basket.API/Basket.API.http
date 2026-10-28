@@ -51,3 +51,7 @@ Content-Type: application/json
 
 ### Delete basket (204 first time, 404 second time)
 DELETE {{baseurl}}/api/basket/{{buyerId}}
+
+
+###
+GET https://localhost:7227/api/basket/user1

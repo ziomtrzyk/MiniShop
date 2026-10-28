@@ -1,6 +1,7 @@
 using Basket.API.Apis;
 using Basket.API.Grpc;
 using Basket.API.Repositories;
+using Basket.API.Services;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 
 builder.AddRedisClient("redis");
+
 builder.Services.AddSingleton<IBasketRepository, RedisBasketRepository>();
+
+builder.Services.AddHttpClient<CatalogClient>(client => 
+    client.BaseAddress = new Uri("https+http://catalog-api"));
 
 builder.Services.AddOpenApi();
 
