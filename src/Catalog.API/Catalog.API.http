@@ -10,3 +10,8 @@ Content-Type: application/json
   "catalogBrandId": 999,
   "availableStock": 5
 }
+
+###
+
+GET {{baseUrl}}/api/catalog/items/by?ids=1&ids=5
+Content-Type: application/json

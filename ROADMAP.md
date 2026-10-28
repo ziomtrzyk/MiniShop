@@ -82,6 +82,7 @@ New concepts: Redis, gRPC, service-to-service calls.
 - [x] Version A: REST endpoints (get / update / delete basket)
 - [x] Version B: rewrite as gRPC service (`.proto` file)
 - [x] Redis added in AppHost
+- [ ] Basket.API fetches product data from Catalog.API
 
 Done when: a basket can be saved and read back through gRPC.
 Compare with: `src/Basket.API/Proto/`, `src/Basket.API/Grpc/`, `src/Basket.API/Repositories/`.

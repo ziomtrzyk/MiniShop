@@ -17,6 +17,8 @@ public static class CatalogApi
 
         api.MapGet("/items/{id:int}", GetItemById);
 
+        api.MapGet("/items/by", GetItemsByIds);
+
         api.MapPost("/items", CreateItem);
 
         api.MapPut("/items/{id:int}", UpdateItem);
@@ -79,6 +81,22 @@ public static class CatalogApi
         return item is null
             ? TypedResults.NotFound()
             : TypedResults.Ok(item.ToDto());
+    }
+
+    public static async Task<Ok<List<CatalogItemDto>>> GetItemsByIds(
+        int[] ids,
+        CatalogContext context,
+        CancellationToken cancellationToken
+    )
+    {
+        var items = await context.CatalogItems
+            .AsNoTracking()
+            .Include(c => c.CatalogBrand)
+            .Include(c => c.CatalogType)
+            .Where(i => ids.Contains(i.Id))
+            .ToListAsync(cancellationToken);
+        
+        return TypedResults.Ok(items.Select(i => i.ToDto()).ToList());
     }
 
     public static async Task<Results<Created<CatalogItemDto>, ValidationProblem>> CreateItem(
