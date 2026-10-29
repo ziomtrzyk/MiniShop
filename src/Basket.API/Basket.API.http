@@ -13,14 +13,10 @@ Content-Type: application/json
   "items": [
     {
       "productId": 1,
-      "productName": "Test Mug",
-      "unitPrice": 9.99,
       "quantity": 2
     },
     {
       "productId": 2,
-      "productName": "Test T-Shirt",
-      "unitPrice": 19.99,
       "quantity": 1
     }
   ]
@@ -42,12 +38,24 @@ Content-Type: application/json
   "items": [
     {
       "productId": 0,
-      "productName": "",
-      "unitPrice": 0,
       "quantity": 1000
     }
   ]
 }
+
+### productId = 999 (should return 400)
+PUT {{baseurl}}/api/basket/999
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "productId": 999,
+      "quantity": 1
+    }
+  ]
+}
+
 
 ### Delete basket (204 first time, 404 second time)
 DELETE {{baseurl}}/api/basket/{{buyerId}}
