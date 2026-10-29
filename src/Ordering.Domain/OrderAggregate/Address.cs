@@ -16,7 +16,7 @@ public class Address : ValueObject
         if(string.IsNullOrWhiteSpace(street) || string.IsNullOrWhiteSpace(city) || string.IsNullOrWhiteSpace(country) || string.IsNullOrWhiteSpace(zipCode))
         {
             
-            throw new OrderingDomainException("Parameters of Adress cannot be null.");
+            throw new OrderingDomainException("Street, city, country and zip code are required.");
         }
         Street = street;
         City = city;
