@@ -6,6 +6,8 @@ var postgres = builder.AddPostgres("postgres")
 
 var catalogDb = postgres.AddDatabase("catalogdb");
 
+var orderingDb = postgres.AddDatabase("orderingdb");
+
 var redis = builder.AddRedis("redis")
     .WithLifetime(ContainerLifetime.Persistent);
 
@@ -17,5 +19,9 @@ builder.AddProject<Projects.Basket_API>("basket-api")
     .WithReference(redis)
     .WaitFor(redis)
     .WithReference(catalogApi);
+
+var orderingApi = builder.AddProject<Projects.Ordering_API>("ordering-api")
+    .WithReference(orderingDb)
+    .WaitFor(orderingDb);
 
 builder.Build().Run();
