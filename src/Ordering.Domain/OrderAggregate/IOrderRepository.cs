@@ -1,0 +1,11 @@
+using Ordering.Domain.SeedWork;
+
+namespace Ordering.Domain.OrderAggregate;
+
+public interface IOrderRepository : IRepository<Order>
+{
+    Order Add(Order order);
+
+    Task<Order?> GetAsync(int orderId, CancellationToken cancellationToken);
+    
+}

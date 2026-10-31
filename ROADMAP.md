@@ -91,9 +91,9 @@ Compare with: `src/Basket.API/Proto/`, `src/Basket.API/Grpc/`, `src/Basket.API/R
 
 New concepts: Clean Architecture split, aggregates, value objects, domain events, MediatR, FluentValidation, pipeline behaviors.
 
-- [ ] Projects: `Ordering.Domain`, `Ordering.Infrastructure`, `Ordering.API`
-- [ ] Aggregate `Order` with `OrderItem`, value object `Address`
-- [ ] Business methods instead of public setters (`SetPaidStatus()`, `Cancel()`)
+- [x] Projects: `Ordering.Domain`, `Ordering.Infrastructure`, `Ordering.API`
+- [x] Aggregate `Order` with `OrderItem`, value object `Address`
+- [x] Business methods instead of public setters (`SetPaidStatus()`, `Cancel()`)
 - [ ] Repository + Unit of Work
 - [ ] Commands + handlers (`CreateOrderCommand`, `CancelOrderCommand`)
 - [ ] Queries (`GetOrdersQuery` / `OrderQueries`)
