@@ -94,7 +94,7 @@ New concepts: Clean Architecture split, aggregates, value objects, domain events
 - [x] Projects: `Ordering.Domain`, `Ordering.Infrastructure`, `Ordering.API`
 - [x] Aggregate `Order` with `OrderItem`, value object `Address`
 - [x] Business methods instead of public setters (`SetPaidStatus()`, `Cancel()`)
-- [ ] Repository + Unit of Work
+- [x] Repository + Unit of Work
 - [ ] Commands + handlers (`CreateOrderCommand`, `CancelOrderCommand`)
 - [ ] Queries (`GetOrdersQuery` / `OrderQueries`)
 - [ ] Behaviors: logging, validation, transaction
