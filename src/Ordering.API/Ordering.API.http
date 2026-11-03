@@ -1,3 +1,42 @@
-@Ordering.API_HostAddress = http://localhost:5196
+@baseurl = http://localhost:5196
 
-###
+### Create order (201, same product twice -> one item with 3 units)
+POST {{baseurl}}/api/orders
+Content-Type: application/json
+
+{
+  "buyerId": "jan",
+  "street": "Main 1",
+  "city": "Krakow",
+  "state": "",
+  "country": "Poland",
+  "zipCode": "30-001",
+  "items": [
+    { "productId": 1, "productName": "Mug", "unitPrice": 9.99, "units": 2 },
+    { "productId": 1, "productName": "Mug", "unitPrice": 9.99, "units": 1 }
+  ]
+}
+
+### Invalid units (400 from domain)
+POST {{baseurl}}/api/orders
+Content-Type: application/json
+
+{
+  "buyerId": "jan",
+  "street": "Main 1",
+  "city": "Krakow",
+  "state": "",
+  "country": "Poland",
+  "zipCode": "30-001",
+  "items": [
+    { "productId": 1, "productName": "Mug", "unitPrice": 9.99, "units": 0 }
+  ]
+}
+
+### Cancel order
+PUT {{baseurl}}/api/orders/1/cancel
+Content-Type: application/json
+
+### Cancel non-existent order
+PUT {{baseurl}}/api/orders/999/cancel
+Content-Type: application/json

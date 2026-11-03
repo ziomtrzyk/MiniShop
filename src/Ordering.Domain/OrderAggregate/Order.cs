@@ -44,11 +44,15 @@ public class Order : Entity, IAggregateRoot
 
     public void SetCancelledStatus()
     {
+        if(OrderStatus is OrderStatus.Cancelled)
+        {
+            return;
+        }
         if(OrderStatus is OrderStatus.Paid or OrderStatus.Shipped)
         {
             throw new OrderingDomainException($"Cannot change the order status from {OrderStatus} to {OrderStatus.Cancelled}");
         }
-
+        
         OrderStatus = OrderStatus.Cancelled;
     }
     

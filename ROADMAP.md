@@ -95,7 +95,7 @@ New concepts: Clean Architecture split, aggregates, value objects, domain events
 - [x] Aggregate `Order` with `OrderItem`, value object `Address`
 - [x] Business methods instead of public setters (`SetPaidStatus()`, `Cancel()`)
 - [x] Repository + Unit of Work
-- [ ] Commands + handlers (`CreateOrderCommand`, `CancelOrderCommand`)
+- [x] Commands + handlers (`CreateOrderCommand`, `CancelOrderCommand`)
 - [ ] Queries (`GetOrdersQuery` / `OrderQueries`)
 - [ ] Behaviors: logging, validation, transaction
 - [ ] Domain events dispatched before `SaveChanges`
