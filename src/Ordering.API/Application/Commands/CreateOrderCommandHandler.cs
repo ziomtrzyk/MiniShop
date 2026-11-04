@@ -1,4 +1,5 @@
 using MediatR;
+using Ordering.Domain.Exceptions;
 using Ordering.Domain.OrderAggregate;
 
 namespace Ordering.API.Application.Commands;

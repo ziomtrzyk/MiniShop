@@ -29,6 +29,8 @@ builder.Services.AddMediatR(cfg =>
     cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
 
     cfg.AddOpenBehavior(typeof(ValidatorBehavior<,>));
+
+    cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
 });
 
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
