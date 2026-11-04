@@ -1,3 +1,4 @@
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Ordering.API.Application.Commands;
@@ -23,7 +24,7 @@ public static class OrdersApi
         return app;
     }
 
-    public static async Task<Results<Created<int>, ProblemHttpResult>> CreateOrderAsync(
+    public static async Task<Results<Created<int>, ValidationProblem, ProblemHttpResult>> CreateOrderAsync(
         CreateOrderCommand request,
         IMediator mediator,
         CancellationToken cancellationToken
@@ -34,6 +35,11 @@ public static class OrdersApi
             var orderId = await mediator.Send(request, cancellationToken);
             return TypedResults.Created($"/api/orders/{orderId}", orderId);
         }
+        catch (ValidationException ex)
+        {
+            return TypedResults.ValidationProblem(ToDictionaryErrors(ex));
+        }
+
         catch (OrderingDomainException ex)
         {
             return TypedResults.Problem(ex.Message, statusCode: StatusCodes.Status400BadRequest);
@@ -60,7 +66,7 @@ public static class OrdersApi
         return TypedResults.Ok(await orderQueries.GetOrdersByBuyerAsync(buyerId, cancellationToken));
     }
 
-    public static async Task<Results<NoContent, NotFound, ProblemHttpResult>> CancelOrderAsync(
+    public static async Task<Results<NoContent, NotFound, ValidationProblem, ProblemHttpResult>> CancelOrderAsync(
         int orderId,
         IMediator mediator,
         CancellationToken cancellationToken
@@ -71,9 +77,20 @@ public static class OrdersApi
         {
             return await mediator.Send(request, cancellationToken) ? TypedResults.NoContent() : TypedResults.NotFound();
         }
+        catch (ValidationException ex)
+        {
+            return TypedResults.ValidationProblem(ToDictionaryErrors(ex));
+        }
         catch (OrderingDomainException ex)
         {
             return TypedResults.Problem(ex.Message, statusCode: StatusCodes.Status400BadRequest);
         }
+    }
+
+    public static Dictionary<string, string[]> ToDictionaryErrors(ValidationException ex)
+    {
+        return ex.Errors
+               .GroupBy(e => e.PropertyName)
+               .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray());
     }
 }

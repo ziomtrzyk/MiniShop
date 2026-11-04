@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Ordering.API.Apis;
 using Ordering.API.Application.Behaviors;
@@ -26,7 +27,11 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssemblyContaining<Program>();
 
     cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+
+    cfg.AddOpenBehavior(typeof(ValidatorBehavior<,>));
 });
+
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 var app = builder.Build();
 

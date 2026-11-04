@@ -17,21 +17,22 @@ Content-Type: application/json
   ]
 }
 
-### Invalid units (400 from domain)
+### Invalid units (400 from validator)
 POST {{baseurl}}/api/orders
 Content-Type: application/json
 
 {
   "buyerId": "jan",
-  "street": "Main 1",
-  "city": "Krakow",
+  "street": "",
+  "city": "",
   "state": "",
-  "country": "Poland",
-  "zipCode": "30-001",
+  "country": "",
+  "zipCode": "",
   "items": [
     { "productId": 1, "productName": "Mug", "unitPrice": 9.99, "units": 0 }
   ]
 }
+
 
 ### Cancel order
 PUT {{baseurl}}/api/orders/1/cancel
@@ -39,6 +40,10 @@ Content-Type: application/json
 
 ### Cancel non-existent order
 PUT {{baseurl}}/api/orders/999/cancel
+Content-Type: application/json
+
+### Cancel incorrect order
+PUT {{baseurl}}/api/orders/0/cancel
 Content-Type: application/json
 
 ### Get order (200)
