@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Ordering.API.Apis;
+using Ordering.API.Application.Behaviors;
 using Ordering.API.Application.Queries;
 using Ordering.Domain.OrderAggregate;
 using Ordering.Infrastructure;
@@ -20,7 +21,12 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 builder.Services.AddScoped<IOrderQueries, OrderQueries>();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssemblyContaining<Program>();
+
+    cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+});
 
 var app = builder.Build();
 
