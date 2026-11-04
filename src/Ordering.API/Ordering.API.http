@@ -40,3 +40,12 @@ Content-Type: application/json
 ### Cancel non-existent order
 PUT {{baseurl}}/api/orders/999/cancel
 Content-Type: application/json
+
+### Get order (200)
+GET {{baseurl}}/api/orders/1
+
+### Get non-existent order (404)
+GET {{baseurl}}/api/orders/999
+
+### Get orders by buyer jan
+GET {{baseurl}}/api/orders?buyerId=jan

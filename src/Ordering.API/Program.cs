@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Ordering.API.Apis;
+using Ordering.API.Application.Queries;
 using Ordering.Domain.OrderAggregate;
 using Ordering.Infrastructure;
 using Ordering.Infrastructure.Repositories;
@@ -16,6 +17,8 @@ builder.Services.AddOpenApi();
 builder.AddNpgsqlDbContext<OrderingContext>("orderingdb");
 
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
+builder.Services.AddScoped<IOrderQueries, OrderQueries>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
 
