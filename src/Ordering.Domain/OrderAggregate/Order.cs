@@ -1,3 +1,4 @@
+using Ordering.Domain.Events;
 using Ordering.Domain.Exceptions;
 using Ordering.Domain.SeedWork;
 
@@ -27,6 +28,8 @@ public class Order : Entity, IAggregateRoot
         Address = address;
         OrderStatus = OrderStatus.Submitted;
         OrderDate = DateTime.UtcNow;
+
+        AddDomainEvent(new OrderStartedDomainEvent(this));
     }
 
     public void AddOrderItem(int productId, string productName, decimal unitPrice, int units)
@@ -54,6 +57,8 @@ public class Order : Entity, IAggregateRoot
         }
         
         OrderStatus = OrderStatus.Cancelled;
+
+        AddDomainEvent(new OrderCancelledDomainEvent(this));
     }
     
     public void SetPaidStatus()

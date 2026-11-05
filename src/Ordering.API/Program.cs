@@ -16,7 +16,9 @@ builder.AddServiceDefaults();
 
 builder.Services.AddOpenApi();
 
-builder.AddNpgsqlDbContext<OrderingContext>("orderingdb");
+builder.Services.AddDbContext<OrderingContext>(options => 
+    options.UseNpgsql(builder.Configuration.GetConnectionString("orderingdb")));
+builder.EnrichNpgsqlDbContext<OrderingContext>();
 
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 

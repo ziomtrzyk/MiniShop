@@ -5,8 +5,7 @@ using Ordering.Domain.OrderAggregate;
 namespace Ordering.API.Application.Commands;
 
 public class CreateOrderCommandHandler(
-    IOrderRepository orderRepository,
-    ILogger<CreateOrderCommandHandler> logger) : IRequestHandler<CreateOrderCommand, int>
+    IOrderRepository orderRepository) : IRequestHandler<CreateOrderCommand, int>
 {
     public async Task<int> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
@@ -19,9 +18,7 @@ public class CreateOrderCommandHandler(
         }
 
         orderRepository.Add(order);
-        await orderRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-        logger.LogInformation("Order {OrderId} created for buyer {BuyerId}", order.Id, order.BuyerId);
+        await orderRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
         return order.Id;
     }

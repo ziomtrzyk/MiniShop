@@ -35,7 +35,7 @@ Content-Type: application/json
 
 
 ### Cancel order
-PUT {{baseurl}}/api/orders/1/cancel
+PUT {{baseurl}}/api/orders/14/cancel
 Content-Type: application/json
 
 ### Cancel non-existent order

@@ -98,7 +98,7 @@ New concepts: Clean Architecture split, aggregates, value objects, domain events
 - [x] Commands + handlers (`CreateOrderCommand`, `CancelOrderCommand`)
 - [x] Queries (`GetOrdersQuery` / `OrderQueries`)
 - [x] Behaviors: logging, validation, transaction
-- [ ] Domain events dispatched before `SaveChanges`
+- [x] Domain events dispatched before `SaveChanges`
 
 Done when: an order can be created and cancelled, and invalid state changes throw domain exceptions.
 Compare with: `src/Ordering.Domain/AggregatesModel/`, `src/Ordering.API/Application/Commands/`,

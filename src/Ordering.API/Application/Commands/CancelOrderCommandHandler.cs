@@ -4,8 +4,7 @@ using Ordering.Domain.OrderAggregate;
 namespace Ordering.API.Application.Commands;
 
 public class CancelOrderCommandHandler(
-    IOrderRepository orderRepository,
-    ILogger<CancelOrderCommandHandler> logger
+    IOrderRepository orderRepository
 ) : IRequestHandler<CancelOrderCommand, bool>
 {
     public async Task<bool> Handle(CancelOrderCommand request, CancellationToken cancellationToken)
@@ -18,9 +17,7 @@ public class CancelOrderCommandHandler(
         }
 
         order.SetCancelledStatus();
-        await orderRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-        logger.LogInformation("Order {OrderId} Status has been changed to {OrderStatus}", order.Id, order.OrderStatus);
+        await orderRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
         return true;
     }
