@@ -1,11 +1,15 @@
+using EventBus.Abstractions;
 using MediatR;
+using Ordering.API.Application.IntegrationEvents.Events;
+using Ordering.Domain.Events;
 using Ordering.Domain.Exceptions;
 using Ordering.Domain.OrderAggregate;
 
 namespace Ordering.API.Application.Commands;
 
 public class CreateOrderCommandHandler(
-    IOrderRepository orderRepository) : IRequestHandler<CreateOrderCommand, int>
+    IOrderRepository orderRepository,
+    IEventBus eventBus) : IRequestHandler<CreateOrderCommand, int>
 {
     public async Task<int> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
@@ -19,6 +23,9 @@ public class CreateOrderCommandHandler(
 
         orderRepository.Add(order);
         await orderRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+
+        var integrationEvent = new OrderStartedIntegrationEvent(order.BuyerId, order.Id);
+        await eventBus.PublishAsync(integrationEvent, cancellationToken);
 
         return order.Id;
     }
