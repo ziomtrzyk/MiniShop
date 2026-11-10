@@ -8,6 +8,7 @@
     <PackageVersion Include="Aspire.Hosting.RabbitMQ" Version="13.6.3" />
     <PackageVersion Include="Aspire.Hosting.Redis" Version="13.6.3" />
     <PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="13.6.3" />
+    <PackageVersion Include="Aspire.RabbitMQ.Client" Version="13.6.3" />
     <PackageVersion Include="Aspire.StackExchange.Redis" Version="13.6.3" />
     <PackageVersion Include="FluentValidation" Version="12.1.1" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
