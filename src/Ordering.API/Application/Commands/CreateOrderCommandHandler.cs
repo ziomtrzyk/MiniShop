@@ -1,8 +1,6 @@
 using EventBus.Abstractions;
 using MediatR;
 using Ordering.API.Application.IntegrationEvents.Events;
-using Ordering.Domain.Events;
-using Ordering.Domain.Exceptions;
 using Ordering.Domain.OrderAggregate;
 
 namespace Ordering.API.Application.Commands;
