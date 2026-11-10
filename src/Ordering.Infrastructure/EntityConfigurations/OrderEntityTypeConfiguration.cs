@@ -10,6 +10,9 @@ public class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
     {
         builder.ToTable("orders");
 
+        builder.Property(o => o.Id)
+            .UseHiLo("orderseq");
+
         builder.Property(o => o.BuyerId)
             .HasMaxLength(100);
 
