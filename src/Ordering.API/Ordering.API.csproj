@@ -19,6 +19,7 @@
     <ProjectReference Include="..\MiniShop.ServiceDefaults\MiniShop.ServiceDefaults.csproj" />
     <ProjectReference Include="..\Ordering.Domain\Ordering.Domain.csproj" />
     <ProjectReference Include="..\Ordering.Infrastructure\Ordering.Infrastructure.csproj" />
+    <ProjectReference Include="..\EventBusRabbitMQ\EventBusRabbitMQ.csproj" />
   </ItemGroup>
 
 </Project>

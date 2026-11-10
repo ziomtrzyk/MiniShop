@@ -20,6 +20,8 @@ builder.Services.AddDbContext<OrderingContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("orderingdb")));
 builder.EnrichNpgsqlDbContext<OrderingContext>();
 
+builder.AddRabbitMqEventBus("eventbus");
+
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 builder.Services.AddScoped<IOrderQueries, OrderQueries>();
